@@ -8,10 +8,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import mvt.co.uk.tweeterfeed.domain.model.Tweet
 import mvt.co.uk.tweeterfeed.repository.TweeterFeedRepository
+import mvt.co.uk.tweeterfeed.service.SchedulerService
 import org.koin.core.KoinComponent
 import timber.log.Timber
 
-class TweeterFeedViewModel(val repository: TweeterFeedRepository) : ViewModel(),
+class TweeterFeedViewModel(
+    val repository: TweeterFeedRepository,
+    val schedulerService: SchedulerService
+) : ViewModel(),
     KoinComponent {
 
     val tweeterFeedLiveData = MutableLiveData<List<Tweet>>()
@@ -23,13 +27,13 @@ class TweeterFeedViewModel(val repository: TweeterFeedRepository) : ViewModel(),
 
     fun loadData() {
         errorLiveData.postValue(false)
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(schedulerService.IO).launch {
             var feedList = emptyList<Tweet>()
             try {
                 feedList = repository.getStatuses()
             } catch (e: Throwable) {
                 Timber.e("Exception ${e.message}")
-                withContext(Dispatchers.Main) {
+                withContext(schedulerService.Main) {
                     errorLiveData.value = true
                 }
             }

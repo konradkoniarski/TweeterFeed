@@ -10,6 +10,7 @@ import org.koin.core.KoinComponent
  */
 class TweeterFeedRepository(val networkService: NetworkService) : KoinComponent {
 
+    @Throws(Throwable::class)
     suspend fun getStatuses(): List<Tweet> {
         //TODO: hardcoded parameters
         val listId = 871746761387323394

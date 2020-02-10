@@ -4,7 +4,9 @@ import android.app.Application
 import android.os.StrictMode
 import mvt.co.uk.tweeterfeed.presentation.tweeterFeed.TweeterFeedViewModel
 import mvt.co.uk.tweeterfeed.repository.TweeterFeedRepository
+import mvt.co.uk.tweeterfeed.service.MainSchedulerService
 import mvt.co.uk.tweeterfeed.service.NetworkService
+import mvt.co.uk.tweeterfeed.service.SchedulerService
 import mvt.co.uk.tweeterfeed.service.SettingService
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
@@ -24,7 +26,9 @@ class TweeterFeedApplication : Application() {
 
         single { TweeterFeedRepository(get()) }
 
-        viewModel { TweeterFeedViewModel(get()) }
+        single { MainSchedulerService() as SchedulerService }
+
+        viewModel { TweeterFeedViewModel(get(), get()) }
     }
 
     override fun onCreate() {
