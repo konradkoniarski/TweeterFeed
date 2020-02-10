@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TweeterFeed</string>
+    <string name="tweeter_feed_api">https://api.twitter.com/1.1/</string>
+
+    <string name="no_data">No data available, please refresh</string>
+
+    <string name="loading">Loading</string>
+    <string name="refresh">Refresh</string>
+    <string name="tweeter_feed_api_token">Bearer AAAAAAAAAAAAAAAAAAAAAF7w0wAAAAAAb6kdTQSU%2F5EmGAMD917iN7rZuVE%3D9ssQYqmHSgDTUgLDOW3k155qYVOxrGUaDSeOrW3IqvHeSoRYiu</string>
+</resources>
